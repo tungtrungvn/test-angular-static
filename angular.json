@@ -29,7 +29,8 @@
             "assets": [
               "src/favicon2.ico",
               "src/assets",
-              "src/web.config"
+              "src/web.config",
+              "src/routes.json"
             ],
             "styles": [
               "node_modules/devextreme/dist/css/dx.light.css",

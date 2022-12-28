@@ -1,0 +1,236 @@
+/*
+Template Name: Material Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+
+
+/*============================================================== 
+ For all pages 
+ ============================================================== */
+
+
+/*******************
+ Main container
+*******************/
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	overflow: hidden;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+} 
+
+.mat-drawer-container{
+	background: $bodycolor !important;
+}
+
+html .page-wrapper{
+		height:calc(100vh - 64px);
+		.page-content{
+				padding: 0px 15px 15px 15px;
+		}
+}
+
+.align-items-center{
+		align-items: center;
+}
+
+.mat-drawer-container {
+	background-color: $bodycolor !important;
+}
+/*******************
+Chartistt chart css
+******************/
+.barchrt{
+		.ct-series-a .ct-bar{
+				stroke:$success;
+		}
+		.ct-series-b .ct-bar{
+				stroke:$info;
+		}
+}
+
+.piechart{
+		.ct-series-a .ct-slice-donut{
+				stroke:$info
+		}
+		.ct-series-b .ct-slice-donut{
+				stroke:$success
+		}
+		.ct-series-c .ct-slice-donut{
+				stroke:$purple
+		}
+		.ct-series-d .ct-slice-donut{
+				stroke:$light
+		}
+		.ct-series-e .ct-slice-donut{
+				stroke:$warning
+		}
+}
+
+/*******************/
+/*social-profile-first*/
+/*******************/
+.little-profile{
+	.pro-img, .pro-img:first-child {
+		margin-top: -110px;
+		margin-bottom: 20px;
+	img {
+		width: 128px;
+		height: 128px;
+		-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+		border-radius: 100%;
+			}
+ }
+}        
+
+.button-row button{
+	margin-bottom: 5px;
+    	margin-right: 5px;
+}
+
+.pl-5 {
+	padding-left: 5px;
+}
+.pr-5 {
+	padding-right: 5px;
+}
+
+.error-show {
+	position: absolute;
+	width: 100%;
+	display: block;
+	color: #ff5a77;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 150%;
+	text-align: center;
+
+  & span {
+    font-weight: 700;
+  }
+}
+
+.disable {
+	&-input {
+		color: rgba(0, 0, 0, 0.38) !important;
+	}
+}
+
+.txt-left {
+	text-align: left;
+}
+
+.txt-center {
+	text-align: center;
+}
+
+.txt-right {
+	text-align: right;
+}
+
+.error-border {
+	.mat-form-field-outline {
+		border-color: red !important;
+	}
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.btn-blue {
+	background-color: #47a7ee !important;
+	color: #ffffff !important;
+}
+
+.btn-cancle {
+	margin-right: 5% !important;
+}
+
+.appointment-dropdown {
+  .mat-select-arrow-wrapper {
+    background-image: url("/assets/images/icons/ic-dropdown.png");
+    background-size: 16px;
+    width: 16px;
+    height: 16px !important;
+  }
+
+	.mat-select-value {
+		width: auto !important;
+	}
+	.mat-select-arrow {
+		opacity: 0;
+	}
+	.mat-select-value-text {
+		display: none;
+	}
+}
+
+::-webkit-scrollbar { 
+	display: none;
+}
+
+.custsom-dropzone {
+	ngx-dropzone-remove-badge {
+		opacity: 1;
+	}
+}
+
+.forgot-password {
+	.mat-form-field-infix {
+		padding: 0.5em 0 0.8em 0;
+	}
+}
+
+.change-password {
+	.mat-form-field-wrapper {
+		padding: 0;
+	}
+}
+
+.c-light-gray {
+	color: lightgray;
+}
+
+.OT_publisher .OT_mute {
+	pointer-events: none;
+}
+
+.custom-input {
+	.mat-form-field-infix {
+	  padding: 4px 0px 12px 0px !important;
+	}
+
+	.mat-form-field-outline {
+	  border: 1px solid;
+	  border-radius: 25px;
+
+	  .error-border {
+	    border-color: red;
+	  }
+	}
+
+	.mat-form-field-outline-start {
+	  border: 0 !important;
+	}
+
+	.mat-form-field-outline-end {
+	  border: 0 !important;
+	}
+
+	.mat-form-field-appearance-outline {
+		border: none;
+	} 
+	.mat-form-field-outline-gap {
+		border: none !important;
+	}
+}

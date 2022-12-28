@@ -1,0 +1,11 @@
+<div class="video-conversations h-100 w-100">
+  <div #chatHistory [style.height]="'calc(100% - '+chatAction.offsetHeight+'px)'" class="d-flex flex-column scroll-y w-100">
+  </div>
+
+  <div #chatAction class="d-flex py-1 border px-3 end">
+    <textarea type="text" autosize rows="2" class="chat-text-message flex-fill border-0" #txtMessage
+      placeholder="Type a message..." id="message" name="message" [(ngModel)]="message"
+      (keydown.enter)="send($event)"></textarea>
+    <button class="border-0 btn-send-chat" (click)="send()"></button>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="doctor-seting row h-100">
+  <div class="doctor-content col-12 h-100 d-flex flex-column">
+    <h4 #heightTitle class="h4 mx-3">Account</h4>
+    <app-doctor-profile class="d-flex flex-grow-1 overflow-hidden" [newAvatar]="newAvatar" (updateProfile)="updateProfile($event)" (uploadAvatar)="uploadAvatar($event)"></app-doctor-profile>
+  </div>
+</div>

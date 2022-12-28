@@ -1,0 +1,52 @@
+<div class="contact" *ngIf="patientInfo">
+  <div class="contact-title m-b-15">
+    CONTACT DETAIL
+  </div>
+  <div class="info">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="item-title">First Name</th>
+          <th class="item-title">Last Name</th>
+          <th class="item-title">Birth Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{patientInfo.firstName}}</td>
+          <td>{{patientInfo.lastName}}</td>
+          <td>{{ patientInfo.birthday | date: 'MM/dd/yyyy' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="address m-b-15">
+    <div class="title m-b-10 item-title">Address </div>
+    <div class="desc" *ngIf="patientInfo.address">
+      {{patientInfo.address.street}} {{patientInfo.address.city}} {{patientInfo.address.state}} {{patientInfo.address.postalCode}}
+    </div>
+  </div>
+  <div class="private-info">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="item-title">Email</th>
+          <th class="item-title">Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{patientInfo.email}}</td>
+          <td>{{patientInfo.phoneNumber}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note hide">
+    <div class="title m-b-10">Note</div>
+    <div class="desc">
+      <p>
+      </p>
+    </div>
+  </div>
+</div>

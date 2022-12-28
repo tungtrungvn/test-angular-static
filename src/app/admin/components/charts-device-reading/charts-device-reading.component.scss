@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.chart {
+  padding: 30px 15px 20px 15px;
+
+  > div {
+    padding-left: inherit;
+    padding-right: inherit;
+    top: 20px;
+    @include media-breakpoint-only(xs) {
+      top: 10px;
+    }
+  }
+}

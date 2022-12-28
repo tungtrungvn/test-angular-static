@@ -1,0 +1,143 @@
+<div class="channel-detail d-flex flex-column h-100 w-100" [ngClass]="{'has-file': mediaList.length}">
+  <div #detailContent class="detail-content overflow-hidden d-flex flex-column px-4 pt-3 flex-grow-1">
+    <div class="detail-title d-flex align-items-center header-height pb-3 overflow-hidden">
+      <div class="channel-avatar">
+        <img width="30" src="{{channelSelected?.channelAvatar}}" alt="avatar" class="img-circle-small">
+        <div class="status"></div>
+      </div>
+      <div class="channel-content-item flex-grow-1 d-flex align-items-center justify-content-between inline">
+        <div class="channel-content-detail flex-grow-1 overflow-hidden d-flex flex-column">
+          <div class="c-left d-flex name mb-2 ff-GoogleSans text-truncate fw-bold">{{channelSelected?.channelName}}</div>
+          <div class="c-right d-flex">
+            <div class="channel-content-detail detail-status text-truncate d-flex">
+              <div class="c-left d-flex status"><span>{{patientInfo?.birthday | birthdate }} years old</span><span *ngIf="patientInfo?.address?.city">, {{patientInfo?.address?.city}}</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="inline ic"><a class="lnk" (click)="onOpenProfile()">
+          <img width="50" src="assets/images/icons/ic-vertital-dot.png" />
+        </a></div>
+      </div>
+      
+    </div>
+
+    <div class="table-wrapper-scroll-y flex-grow-1 my-custom-scrollbar" #detailMessages>
+      <lightgallery [onInit]="onInit" *ngIf="channelSelected && channelSelected?.messages?.length" [settings]="settings">
+        <table class="table table">
+          <tbody>
+            <tr *ngFor="let item of channelSelected?.messages">
+              <td *ngIf="item.text || item.media">
+                <div *ngIf="item.uid === currentUser?.id?.toString()" class="post-own">
+                  <div class="receiver-content-text" *ngIf="item.text">
+                    <div class="text text-break">
+                      {{item.text}}
+                    </div>
+                    <div class="time">{{item.timestamp | date: 'hh:mm a'}}</div>
+                  </div>
+                  <div class="receiver-content-attach">
+                    <ng-template [ngTemplateOutlet]="mediaView" [ngTemplateOutletContext]="{item: item}"></ng-template>
+                  </div>
+                </div>
+                <div *ngIf="item.uid !== currentUser?.id?.toString() " class="post-friend">
+                  <div class="d-flex">
+                    <div class="sender-avatar inline">
+                      <img width="43" src="{{channelSelected.channelAvatar}}" alt="avatar"
+                           class="img-circle-small detail">
+                    </div>
+
+                    <div class="sender-content inline">
+                      <div class="sender-content-text" *ngIf="item.text">
+                        <div class="sender-name">
+                          {{item.name}}
+                        </div>
+                        <div class="text text-break">
+                          {{item.text}}
+                        </div>
+                        <div class="time">{{item.timestamp | date: 'hh:mm a'}}</div>
+                      </div>
+                      <div class="sender-content-attach">
+                        <ng-template [ngTemplateOutlet]="mediaView" [ngTemplateOutletContext]="{item: item}"></ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </lightgallery>
+      <ng-template #mediaView let-item="item">
+        <div class="media-preview" *ngIf="item.media && getFileTypeByContentType(item.mediaType)===1">
+          <a [attr.data-sub-html]="'<h4 class=\'h4\'>'+item.name+'</h4><p>Published on '+(item.timestamp | date: 'medium')+'</p>'" class="light-gallery" [href]="item.media"><img [src]="item.media | safe:'url'" /></a>
+        </div>
+        <div class="media-preview" *ngIf="item.media && getFileTypeByContentType(item.mediaType)===2">
+          <!--lightgallery for video [attr.data-video]='"{\"source\": [{\"src\": \""+item.media+"\", \"type\": \"video/mp4\"}], \"attributes\": {\"preload\": false, \"playsinline\": true, \"controls\": true}}"'-->
+          <vg-player>
+            <vg-overlay-play></vg-overlay-play>
+            <vg-buffering></vg-buffering>
+            <vg-controls [vgAutohide]="true" [vgAutohideTime]="2" class="justify-content-between">
+              <div class="d-flex flex-grow-1">
+                <vg-play-pause></vg-play-pause>
+
+                <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+                <vg-scrub-bar class="flex-grow-1">
+                  <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+                <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+              </div>
+
+              <div class="d-flex">
+                <vg-mute></vg-mute>
+                <vg-volume></vg-volume>
+                <vg-fullscreen></vg-fullscreen>
+              </div>
+            </vg-controls>
+            <video #videoView [vgMedia]="$any(videoView)" preload="auto">
+              <source [src]="item.media | safe:'url'" type="video/mp4">
+            </video>
+          </vg-player>
+        </div>
+      </ng-template>
+    </div>
+
+  </div>
+  <hr class="mb-0 mt-0 flex-grow-0"/>
+  <div class="channel-detail-footer d-flex flex-column flex-grow-0">
+    <div class="channel-detail-footer-content w-100 d-flex flex-column flex-grow-1">
+      <div #dropzone class="custsom-dropzone d-flex overflow-auto" style="width: calc(100% - 20px)">
+        <ng-container *ngFor="let media of mediaList; let i = index">
+          <ngx-dropzone-image-preview *ngIf="media.fileType===1" [file]="media.file" [removable]="true"
+                                      (removed)="onRemove(i)"></ngx-dropzone-image-preview>
+          <ngx-dropzone-video-preview *ngIf="media.fileType===2" [file]="media.file" [removable]="true"
+                                      (removed)="onRemove(i)"></ngx-dropzone-video-preview>
+        </ng-container>
+      </div>
+
+      <form class="detail-footer mt-2 send-message" [formGroup]="chatDetailForm" (ngSubmit)="publish()">
+        <button type="button" mat-icon-button class="conversation__btn btn btn--send" title="Attach file" (click)="fileInput.click()">
+          <input type="file" #fileInput (change)="onSelectFile($event)" hidden multiple />
+          <img height="30" src="assets/images/icons/ic-chat-attach.png" />
+        </button>
+
+        <textarea class="form-control" 
+            formControlName="message" 
+            placeholder="Type a message..."
+            #inputMessage
+            autofocus
+            autosize
+            (keydown)="onHandleKeyPress($event)"
+            [minRows]="2"
+            [maxRows]="5"
+            style="resize: none;"
+        >
+          </textarea>
+
+        <button mat-icon-button class="conversation__btn btn btn--send" type="submit" title="Send message">
+          <img height="30" src="assets/images/icons/ic-chat-send.png" />
+        </button>
+      </form>
+    </div>
+
+  </div>
+</div>

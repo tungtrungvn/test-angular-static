@@ -1,0 +1,63 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.profile {
+  margin-bottom: 15px;
+  height: 100%;
+  .title {
+    margin-left: 20px;
+    font-size: 16px;
+  }
+  .name {
+    font-weight: bold;
+  }
+
+  .patient-common-info {
+    margin-bottom: 20px;
+    .patient-avatar {
+      //width: 90px;
+      margin-right: 10px;
+      vertical-align: top;      
+    }
+    .patient-content-item {
+      vertical-align: top;
+      position: relative;
+      width: calc(100% - 90px);
+
+      .name {
+        margin-bottom: 5px;
+      }
+
+      .info {
+        color: #33333380;
+      }
+    }
+  }
+
+  .patient-general {
+    padding: 15px 0;
+    .patient-common {
+      .patient-field {
+        line-height: 22px;
+        color: #707070;
+        width: 80px;
+      }
+      .patient-value {
+        line-height: 22px;
+        font-weight: bold;
+      }
+    }
+  }
+  .header-height {
+    @include media-breakpoint-down(sm) {
+      height: auto;
+    }
+  }
+  .profile-content {
+    height: calc(100% - 90px);
+    @include media-breakpoint-down(sm) {
+      height: auto;
+    }
+  }
+}

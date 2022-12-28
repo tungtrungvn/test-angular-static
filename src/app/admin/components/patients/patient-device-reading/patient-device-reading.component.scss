@@ -1,0 +1,40 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.device-reading {
+  .title {
+    color: #47A7EE;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  img {
+    width: 100%;
+    margin: 15px 0;
+  }
+  .charts {
+    font-size: 16px;
+    h5, h4 {
+      color: #646D82;
+      text-transform: uppercase;
+      small {
+        color: #A6B1C2 !important;
+        text-transform: none;
+      }
+    }
+    h5 {
+      font-size: .8em !important;
+    }
+    h4 {
+      font-size: 1em !important;
+    }
+    @include media-breakpoint-down(lg) {
+      h5 {
+        font-size: 14px !important;
+      }
+      h4 {
+        font-size: 18px !important;
+      }
+    }
+  }
+}

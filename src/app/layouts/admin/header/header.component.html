@@ -1,0 +1,32 @@
+<div #headerItem class="header-item header d-flex" [class.f-mh]="isVideoCallScreen" [ngClass]="headerInWhite ? 'bg-white justify-content-between' : (showBack ? 'justify-content-between' : 'justify-content-sm-end justify-content-between')">
+    <div class="logo-container" *ngIf="showLogo">
+        <a class="logo" href="index.html">
+            <img class="h-100 d-block" style="max-height: 40px" src="assets/images/logo.svg" alt="Move78">
+        </a>
+    </div>
+    <div class="patient-info align-items-center d-flex flex-column flex-sm-row" *ngIf="showPatientInfoInHeader">
+        <div class="name text-truncate">{{patientName}}</div>
+        <div class="extra-info text-truncate">{{patientExtraInfo}}</div>
+    </div>
+    <a (click)="setExpanded.emit(!isExpanded)" class="lnk-expand ms-3" *ngIf="!showLogo && !showBack"><img alt="" src="assets/images/icons/ic-expand.png" class="ng-tns-c69-1" /></a>
+    <div *ngIf="showBack" class="back-wrapper" [class.show-logo-and-back-btn]="isVideoCallScreen" [ngClass]="{'position-absolute offset-md-4': showBack && showLogo && !mobileQuery.matches, 'only-video-chat': showBack && showLogo}">
+        <button class="btn" (click)="onReturnList()">
+            <div class="icon">
+                <img src="assets/images/icons/ic-arrow.png" alt="" width="25" height="24" />
+            </div>
+            <div class="title">{{backButtonText}}</div>
+        </button>
+    </div>
+    <div class="profile d-flex align-items-center">
+        <div class="avatar d-flex align-items-center justify-content-center">
+            <a href="#">
+                <!-- <div class="no-image"></div> -->
+                <img [src]="doctorInfo.avatarUrl ?? doctorInfo.avatar ?? noAvatar" width="40" height="40" alt="">
+            </a>
+            <div class="info">
+                <div class="name ff-GoogleSans fw-bold text-black">{{doctorInfo.firstName}} {{doctorInfo.lastName}}</div>
+                <div class="career">{{doctorInfo.specialty}}</div>
+            </div>
+        </div>
+    </div>
+</div>

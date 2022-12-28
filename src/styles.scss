@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import '~lightgallery/scss/lightgallery';
+@import '~lightgallery/scss/lg-thumbnail';
+@import '~lightgallery/scss/lg-zoom';
+@import '~lightgallery/scss/lg-video';
+@import '~lightgallery/scss/lg-autoplay';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Inter", sans-serif; }
+
+.mat-tab-label, .mat-tab-link {
+  font-family: "Google Sans", sans-serif !important;
+}

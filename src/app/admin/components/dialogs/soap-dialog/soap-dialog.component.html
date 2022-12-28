@@ -1,0 +1,58 @@
+<mat-dialog-content class="popup">
+  <div class="subject">
+    <h3 mat-dialog-title class="header-text">SOAP NOTE</h3>
+    <div class="sub-title">
+      <div class="name">{{ data.patientInfo.firstName }} {{ data.patientInfo.lastName }}</div>
+      <div class="v-hr">
+        <hr>
+      </div>
+      <div class="info">{{ data.patientInfo?.birthday | birthdate }} years, {{ data.patientInfo.address?.city }}</div>
+    </div>
+  </div>
+  <hr>
+  <form [formGroup]="soapForm" *ngIf="soapForm" (ngSubmit)="onSubmit()">
+    <div class="content">
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <div class="sub">
+            Subjective
+          </div>
+          <div class="desc">
+            <textarea rows="4" formControlName="subjective"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <div class="sub">
+            Assessment
+          </div>
+          <div class="desc">
+            <textarea rows="4" formControlName="assessment"></textarea>
+          </div>
+        </div>     
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <div class="sub">
+            Objective
+          </div>
+          <div class="desc">
+            <textarea rows="4" formControlName="objective"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+          <div class="sub">
+            Plan
+          </div>
+          <div class="desc">
+            <textarea rows="4" formControlName="plan"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-action-group">
+      <button type="button" class="btn btn-cancel" [mat-dialog-close]="false">Cancel</button>
+      <button type="submit" class="btn btn-save" [mat-dialog-close]="true">Save</button>
+    </div>
+  </form>
+ 
+</mat-dialog-content>

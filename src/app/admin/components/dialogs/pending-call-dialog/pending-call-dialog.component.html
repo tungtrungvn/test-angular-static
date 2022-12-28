@@ -1,0 +1,10 @@
+<mat-dialog-content class="text-center popup">
+        <h4 mat-dialog-title class="header-text">ENCOUNTER IS IN PROGRESS</h4>
+        <div><label class="patient-name">{{data.patientName}}</label><label class="patient-info">{{data.patientExtraInfo}}</label></div>
+        <hr>
+        <p class="body-text">Your encounter with this patient is still in progress. Do you want to rejoin and continue the session?</p>
+        <div class="btn-action-group">
+                <button type="button" class="btn btn-cancel" [mat-dialog-close]="false" (click)="onEnd()">End</button>
+                <button type="button" class="btn btn-ok" [mat-dialog-close]="true" (click)="onRejoin()">Rejoin</button>
+        </div>
+</mat-dialog-content>

@@ -1,0 +1,19 @@
+pr:
+  - dev
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    submodules: true
+  - bash: 'npm install -g @angular/cli@latest'
+  - bash: 'npm install --legacy-peer-deps'
+  - bash: 'ng build --configuration=dev'
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: '/dist'
+      app_build_command: 'npm run build'
+      output_location: '/'
+      verbose: true
+      azure_static_web_apps_api_token: $(deployment_token)

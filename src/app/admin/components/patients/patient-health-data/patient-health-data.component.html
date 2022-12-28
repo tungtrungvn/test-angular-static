@@ -1,0 +1,19 @@
+<div class="d-flex flex-wrap">
+  <app-charts-device-reading class="my-2 col-12 col-sm-6 col-md-6 px-2" *ngFor="let chart of charts"
+                             [chartData]="chart.chartData"
+                             [chartLabels]="chart.chartLabels"
+                             [chartOptions]="chart.chartOptions"
+                             [background]="chart.background"
+                             [chartColor]="chart.chartColor"
+                             [leftText]="leftText"
+                             [rightText]="rightText"
+                             [unit]="chart.unit"
+  >
+    <ng-template #leftText>
+      <h5 *ngIf="chart.display" class="h5 fs-6 text-uppercase d-flex flex-column fw-bold">{{chart.display}}</h5>
+    </ng-template>
+    <ng-template #rightText>
+      <h4 *ngIf="chart.total" [style.color]="chart.chartColor" class="h4 text-uppercase fs-5 d-flex fw-bold"> {{chart.total | number: '1.0-2'}}<small *ngIf="chart.unit" class="text-muted ms-2 fw-normal small text-capitalize">{{chart.unit}}</small></h4>
+    </ng-template>
+  </app-charts-device-reading>
+</div>

@@ -1,0 +1,27 @@
+.video-questions {
+  font-size: 14px;
+  .icon {    
+    span {
+      color: #1FB5EB;
+    }
+  }
+  .detail {
+    width: 100%;
+    margin: 15px 0;
+    .title {
+      padding: 10px;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      margin-bottom: 3px;
+      background: #F2F2F2;
+      font-weight: bold;
+    }
+    .answers {
+      padding: 10px;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      margin-bottom: 5px;
+      background: #F2F2F2;
+    }
+  }
+}

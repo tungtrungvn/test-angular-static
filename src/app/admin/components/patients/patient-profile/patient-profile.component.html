@@ -1,0 +1,52 @@
+<div class="profile d-flex flex-column px-4 pt-3">
+  <h3 class="header-height pb-3 mb-0 border-bottom border-1" style="--bs-border-color: #d3d3d3;">
+    <a class="lnk" (click)="onHideProfile()">
+      <img width="15" src="assets/images/icons/ic-metro-cross.png" />
+    </a>
+    <span class="title">Patient Info </span>
+  </h3>
+  <div class="profile-content d-flex flex-column overflow-auto flex-grow-1">
+    <div class="patient-common-info mt-3 mb-3">
+      <div class="patient-avatar inline">
+        <img width="90" height="90" src="{{patientInfo?.avatarUrl ?? noAvatar}}" alt="avatar" class="img-circle-small">
+      </div>
+
+      <div class="patient-content-item inline">
+        <div class="name text-truncate">{{patientInfo?.firstName}} {{patientInfo?.lastName}}</div>
+        <div class="info text-truncate">{{patientInfo?.email}}</div>
+        <div class="info text-truncate">{{patientInfo?.phoneNumber}}</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <div class="patient-general pt-0">
+        <div class="patient-common">
+          <div class="patient-field inline">Gender</div>
+          <div class="patient-value inline">{{patientInfo?.gender === 0 ? 'Male': 'Female'}}</div>
+        </div>
+        <div class="patient-common">
+          <div class="patient-field inline">Age</div>
+          <div class="patient-value inline">
+            {{ patientInfo?.birthday | birthdate }} years old
+          </div>
+        </div>
+        <div class="patient-common">
+          <div class="patient-field inline">Height</div>
+          <div class="patient-value inline">{{patientInfo?.height | height }}</div>
+        </div>
+        <div class="patient-common">
+          <div class="patient-field inline">Weight</div>
+          <div class="patient-value inline">{{patientInfo?.weight + ' lb'}}</div>
+        </div>
+        <div class="patient-common">
+          <div class="patient-field inline">Waist</div>
+          <div class="patient-value inline">{{patientInfo?.waist + ' in'}}</div>
+        </div>
+      </div>
+
+      <app-patient-device-reading *ngIf="patientInfo" [firebaseId]="patientInfo.firebaseUserId"></app-patient-device-reading>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,15 @@
+<div class="chart position-relative" [style.background-color]="background">
+  <div class="d-flex pe-none position-absolute start-0 end-0 justify-content-between">
+<!--    <div class="chart-info left-info" [innerHTML]="leftText"></div>-->
+<!--    <div class="chart-info right-info" [innerHTML]="rightText"></div>-->
+    <ng-container [ngTemplateOutlet]="leftText"></ng-container>
+    <ng-container [ngTemplateOutlet]="rightText"></ng-container>
+  </div>
+  <canvas #canvasElement #chart="base-chart" baseChart
+          [type]="'line'"
+          [datasets]="chartData"
+          [plugins]="chartPlugins"
+          [labels]="chartLabels"
+          [options]="$any(chartOptions)"
+  ></canvas>
+</div>

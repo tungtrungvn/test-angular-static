@@ -1,0 +1,234 @@
+@import '/src/assets/styles/variable.scss';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.sidebar {
+    font-size: 12px;
+    background-color: #F7F7F7;
+    border-radius: 10px;
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    bottom: 15px;
+    transition: 0.3s;
+    width: 245px;
+    z-index: 100;
+    overflow: hidden;
+    @include media-breakpoint-down(lg) {
+        box-shadow: 0 0 5px 1px rgba(195,195,195,0.8);
+    }
+    .content-item {
+        position: relative;
+        padding: 15px;
+        font-size: 18px;
+        line-height: 30px;
+        cursor: pointer;
+        font-weight: 200;
+
+        &.active {
+            background: #DFE0E2;
+            font-weight: bold;
+            .title {
+                font-weight: 900 !important;
+            }
+        }
+    }
+
+    .lnk {
+        text-decoration: none;
+        color: black;
+    }
+
+    .head {
+        min-height: auto;
+        padding-top: 10px;
+        @include media-breakpoint-up(sm) {
+            min-height: 90px;
+        }
+        .short-logo {
+            display: none;
+        }
+
+        .logo {
+            display: inline;
+
+            img {
+                vertical-align: top;
+            }
+        }
+
+        .logo-title {
+            display: inline-block;
+            font-size: 30px;
+            margin-top: 10px;
+            margin-left: 5px;
+            font-weight: bold;
+            color: #E51E16;
+        }
+
+        .lnk-expand {
+            display: inline;
+            float: right;
+            margin-top: 15px;
+            margin-right: 10px;
+
+            img {
+                width: 26px;
+            }
+        }
+    }
+
+    .sidebar-content {
+        .link {
+            .content-item {
+                .icon {
+                    display: inline;
+                    padding-right: 15px;
+
+                    img {
+                        width: 25px;
+                    }
+                }
+
+                .title {
+                    display: inline;
+                    font-weight: 200;
+                }
+
+                .status {
+                    float: right;
+                    border: 1px solid #F80D38;
+                    border-radius: 50%;
+                    padding: 0px 5px;
+                    background-color: #F80D38;
+                    color: white;
+                    font-size: 10px;
+                    display: inline;
+                }
+            }
+
+            .children {
+                .content-item {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+
+    .sidebar-footer-content {
+        bottom: 10px;
+        //position: absolute;
+        font-size: 16px;
+
+        .sidebar-footer {
+            padding: 0 0 15px 15px;
+
+            img {
+                width: 100%;
+            }
+
+            .title {
+                color: #F80D38;
+                font-weight: bold;
+                font-style: italic;
+            }
+
+            .hotlines {
+                padding-left: 0;
+                font-size: 14px;
+                .tel {
+                    a {
+                        color: #343434;
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            .content-item {
+                padding: 10px;
+
+                .tel {
+                    font-size: 10px;
+                }
+            }
+        }
+
+    }
+
+    &.expanded {
+        width: 60px;
+        @include media-breakpoint-down(sm) {
+            left: -100%;
+        }
+        .head {
+            text-align: center;
+            .short-logo {
+                display: block;
+                text-align: center;
+                padding-top: 15px;
+            }
+
+            .logo-title {
+                display: none;
+            }
+
+            .lnk-expand {
+                float: left;
+                padding-left: 15px;
+            }
+            hr {
+                display: none;
+            }
+
+        }
+        .sidebar-content {
+            .link {
+                .content-item {
+                    .title {
+                        display: none;
+                    }
+
+                    .status {
+                        display: none;
+                    }
+                }
+
+                .children {
+                    .content-item {
+                        padding: 15px;
+                    }
+                }
+
+                &.with-children {
+                    .content-item.parent {
+                        display: none;
+                    }
+
+                    .children {
+                        .link {
+                            padding: 0 !important;
+                        }
+                    }
+
+                }
+            }
+
+        }
+        .sidebar-footer-content {
+            hr {
+                display: none;
+            }
+            .sidebar-footer {
+                .emergency {
+                    img {
+                        width: 25px;
+                    }
+                }
+                .hotlines {
+                    display: none;
+                }
+            }
+        }
+    }
+}

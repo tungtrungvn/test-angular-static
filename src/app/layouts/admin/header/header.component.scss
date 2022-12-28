@@ -1,0 +1,197 @@
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.header {
+  padding: 20px 15px;
+  position: relative;
+  max-height: 90px;
+  align-items: center;
+  @include media-breakpoint-down(md) {
+    padding: 15px 0;
+
+    .profile {
+      margin-right: 10px;
+    }
+  }
+  &.f-mh {
+    @media (max-width: 370px) {
+      max-height: unset;
+      padding-top: 0;
+    }
+  }
+  .back-wrapper {
+    //left: 15px;
+    background: #FFFFFF;
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.078));
+    border-radius: 10px;
+    @include media-breakpoint-down(md) {
+      position: static;
+      margin-left: 15px;
+    }
+    &.only-video-chat {
+      @include media-breakpoint-down(sm) {
+        margin-left: 0;
+        width: 100%;
+        order: 3;
+        background: transparent;
+        filter: none;
+        border-radius: 0;
+        display: flex;justify-content: center;
+        .btn {
+          border-radius: 10px;
+          box-shadow: 0 3px 6px rgb(0 0 0 / 8%);
+        }
+      }
+    }
+    .btn {
+      .icon {
+        display: inline;
+        padding-right: 10px;
+      }
+
+      .title {
+        display: inline;
+      }
+      @include media-breakpoint-down(sm) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .logo-container {
+
+  }
+
+  .logo {
+    display: inline;
+    @include media-breakpoint-down(lg) {
+      img {
+        height: 50px !important;
+      }
+    }
+    @include media-breakpoint-down(md) {
+      img {
+        height: 40px !important;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      img {
+        height: 30px !important;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .profile {
+    display: inline;
+    float: right;
+    margin-right: 15px;
+
+    .no-image {
+      float: left;
+      margin-top: 5px;
+    }
+
+    .info {
+      display: inline-block;
+      margin-left: 15px;
+      color: rgba(51, 51, 51, 0.5);
+      @include media-breakpoint-down(sm) {
+        margin-left: 5px;
+        font-size: 12px;
+      }
+    }
+
+    .dropdown-toggle::after {
+      display: none;
+    }
+
+    .avatar {
+      img {
+        border-radius: 50%;
+        vertical-align: top;
+      }
+    }
+  }
+
+  .lnk-expand {
+    display: none;
+    @include media-breakpoint-down(sm) {
+      display: block;
+    }
+    img {
+      width: 32px;
+    }
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .header {
+    flex-wrap: wrap;
+    .profile {
+      margin-right: 5px;
+    }
+  }
+}
+
+.patient-info {
+  //margin-top: 5px;
+  @media (max-width: 370px){
+    order: -1;
+    width: 100%;
+    flex-direction: row !important;
+    justify-content: center;
+    margin-top: 5px;
+  }
+  //min-width: 250px;
+  .name {
+    font-size: 20px;
+    font-weight: 900;
+    border-right-color: #C5C5C5;
+    border-right-style: solid;
+    border-right-width: 1px;
+    height: 22px;
+    padding-right: 5px;
+    width: auto;
+  }
+
+  .extra-info {
+    margin-left: 10px;
+    margin-top: 2px;
+    width: auto;
+    font-size: 14px;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .name {
+      white-space: unset;
+      border: none;
+      padding: 0;
+      font-size: 16px;
+      @media (max-width: 370px) {
+        padding-right: 5px;
+        border-right-color: #C5C5C5;
+        border-right-style: solid;
+        border-right-width: 1px;
+      }
+    }
+    .extra-info {
+      white-space: unset;
+      margin-left: 0;
+      font-size: 12px;
+      @media (max-width: 370px) {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+/*.show-logo-and-back-btn {
+  left: 360px !important;
+  @include media-breakpoint-down(lg) {
+    left: 340px !important;
+  }
+  //margin-left: 200px;
+  //margin-top: -15px;
+}*/

@@ -1,0 +1,17 @@
+<div class="scheduler-page d-flex flex-column">
+  <h4 #heightTitle class="h4">Scheduler</h4>
+  <div class="scheduler-content flex-grow-1" [style.height]="'calc(100% - '+(heightTitle.offsetHeight + 8)+'px)'">
+    <dx-scheduler [dataSource]="appointmentsData" [views]='["day", "week", "month"]' currentView="week"
+      appointmentTemplate="appointmentTemplate" [currentDate]="currentDate"
+      (onAppointmentFormOpening)="onAppointmentFormOpening($event)">
+      <dxo-editing [allowResizing]="false" [allowDragging]="false"></dxo-editing>
+      <div *dxTemplate="let model of 'appointmentTemplate'"
+        [style.background-color]="getBackgroundColor(model)">
+        <div>{{model.appointmentData.text}}</div>
+        <div>{{model.appointmentData.startDate | date: 'hh:mm a'}} - {{model.appointmentData.endDate | date: 'hh:mm a'}}
+        </div>
+      </div>
+      <dxo-scrolling mode="virtual"></dxo-scrolling>
+    </dx-scheduler>
+  </div>
+</div>

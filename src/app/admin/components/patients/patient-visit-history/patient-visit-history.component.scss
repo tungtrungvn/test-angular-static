@@ -1,0 +1,20 @@
+.visit-history {
+  //height: 73vh;
+  //overflow-y: auto;
+  .bold {
+    font-weight: bold;
+  }
+  .table {
+    th {
+      border: 0;
+      font-size: 11px;
+      font-family: 'poppins-bold', sans-serif !important;
+    }
+    td {
+      a {
+        text-decoration: none;
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.account-details {
+  position: relative;
+  font-weight: 900;
+  font-family: "Google Sans" !important;
+  padding: 0 7%;
+  background: #ffffff;
+  &__top {
+    .avatar {
+      position: relative;
+
+      img {
+        width: 60%;
+        aspect-ratio : 1 / 1;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+        @include media-breakpoint-up(sm) {
+          width: 100%;
+        }
+      }
+
+      &-edit {
+        position: absolute;
+        display: none;
+        @include media-breakpoint-up(sm) {
+          left: 0;
+          bottom: 0;
+          right: 0;
+        }
+      }
+    }
+
+    .avatar:hover .avatar-edit {
+      display: block;
+    }
+
+    .name {
+      //width: auto;
+
+      label {
+        margin: 5% 0;
+        font-size: 30px;
+        color: rgba(0, 0, 0, 0.6);
+        line-height: 1em;
+        @include media-breakpoint-down(md) {
+          font-size: 18px;
+          margin: 2% 0;
+        }
+      }
+
+      p {
+        font-size: 25px;
+        color: rgba(0, 0, 0, 0.4);
+        @include media-breakpoint-down(md) {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .email {
+      margin-top: 2%;
+
+      label {
+        display: inline-block;
+        margin-bottom: 1px;
+      }
+
+      input {
+        padding: 1.8%;
+        border-radius: 25px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: rgba(0, 0, 0, 0.1);
+        color: rgba(0, 0, 0, 0.38);
+      }
+    }
+
+    .change-password {
+      margin-top: 2%;
+      //width: auto;
+
+      a {
+        padding: 10px;
+        text-align: center;
+        display: inline-block;
+        color: #47a7ee;
+      }
+    }
+
+    &-button {
+      text-align: center;
+      @include media-breakpoint-up(sm) {
+        text-align: right;
+      }
+    }
+  }
+
+  &__bottom {
+    form {
+      padding: 0;
+    }
+
+    &-group {
+      margin: 3% 0 1% 0;
+    }
+
+    .form-group {
+      label {
+        display: inline-block;
+        margin-bottom: 1px;
+      }
+    }
+
+    p {
+      margin: 0 !important;
+    }
+
+    .optional {
+      position: absolute;
+      font-style: italic;
+    }
+  }
+}

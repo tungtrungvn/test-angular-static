@@ -1,0 +1,36 @@
+.contact {
+  .item-title {
+    color: #707070;
+  }
+  .m-b-15 {
+    margin-bottom: 15px;
+  }
+  .m-b-10 {
+    margin-bottom: 10px;
+  }
+  .contact-title {
+    font-size: 18px;
+  }
+  table {
+    th {
+      font-weight: normal;
+      border: 0;
+      padding: 0;
+    }
+    td {
+      border: 0;
+      padding: 8px 0 0 0;
+      font-weight: bold;
+    }
+  }
+  .address {
+    .desc {
+      font-weight: bold;
+    }
+  }
+  .note {
+    .title {
+      font-size: 18px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<div class="chat-page">
+  <div class="row h-100">
+    <div class="chat-lst d-flex h-100 col-12 d-lg-block"
+         *ngIf="showChat === null || showChat === true"
+         [ngClass]="{
+            'expand-detail col-lg-4 pe-lg-0': channelSelected, 'mobile-chat': showChat === true, 'd-none': showChat === false,
+            'col-lg-12': !channelSelected
+          }">
+      <app-chat-list class="mb-3 w-100 flex-grow-1" [channels]="channels" [channelSelected]="channelSelected" [hasData]="hasData"
+                     (selectedChannelChange)="onSelectChannel($event)"></app-chat-list>
+    </div>
+    <div *ngIf="channelSelected" class="d-flex h-100 col-12 ps-lg-0 col-lg-8" [class.d-block]="showChat === false || showChat === null" [class.d-none]="showChat === true">
+      <div class="ps-lg-0 pb-3 pe-3 ps-3 d-flex w-100">
+        <div class="detail-page d-flex h-100">
+          <div class="chat-details" [ngClass]="{'expand-profile': isExpandProfile }">
+            <app-chat-detail class="d-flex w-100" (openProfile)="onToogleProfile(true)" [client]="client" [channelSelected]="channelSelected" [patientInfo]="patientInfo"></app-chat-detail>
+          </div>
+          <div class="chat-patient-profile" [ngClass]="{'active-profile': isExpandProfile }">
+            <app-patient-profile
+                    class="h-100"
+                    (hideProfile)="onToogleProfile(false)"
+                    (getPatientProfile)="getPatientProfile($event)"
+                    [patientId]="channelSelected?.partnerId"
+            ></app-patient-profile>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

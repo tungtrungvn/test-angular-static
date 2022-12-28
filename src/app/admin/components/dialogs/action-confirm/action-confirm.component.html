@@ -1,0 +1,8 @@
+<mat-dialog-content class="text-center popup">
+  <h4 mat-dialog-title>{{data.headerText}}</h4>
+  <p>{{data.content}}</p>
+  <div class="btn-action-group">
+      <button *ngIf="data.btnCancelText" class="m-right" [mat-dialog-close]="false">{{data.btnCancelText}}</button>
+      <button *ngIf="data.btnOkText" (click)="onSubmit()" [mat-dialog-close]="true">{{data.btnOkText}}</button>
+  </div>
+</mat-dialog-content>

@@ -1,0 +1,61 @@
+<div class="panel panel-default login-form">
+    <div class="content row flex-md-row flex-column justify-content-end">
+        <div class="logo col-md-5 col-lg-4 col-10 col-sm-8 col-xl-3">
+            <img [src]="imgLogo" alt="Admin Site" class="logo">
+        </div>
+        <div class="content-info d-flex flex-column justify-content-between col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5">
+            
+            <div class="panel-body d-flex flex-column flex-grow-1">
+                <div class="title-group">
+                    <div class="title-p">
+                        <h1 class="text-center fw-semibold">Welcome!</h1>
+                    </div>
+                    <div class="title-c">
+                        <h4 class="text-center fw-semibold">Sign In</h4>
+                    </div>
+                </div>
+                <form class="flex-grow-1 d-flex flex-column justify-content-start" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                    <div class="alert" role="alert"
+                         [ngClass]="{ 'alert-danger':message.type == 'error' , 'alert-success':message.type == 'success'}"
+                         *ngIf="message">{{message.message}}</div>
+                    <div class="form-group">
+                        <label for="email" class="ff-Agrandir-medium">Email</label>
+                        <input id="email" type="email" class="form-control" formControlName="email">
+                        <div
+                            *ngIf="f.email.invalid && f.email.hasError('required') && (f.email.dirty || f.email.touched)">
+                            Email is required</div>
+                        <div *ngIf="f.email.invalid && f.email.hasError('email')">Invalid email format</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="ff-Agrandir-medium">Password</label>
+                        <input id="password" type="password" class="form-control" formControlName="password">
+                        <div
+                            *ngIf="f.password.invalid && f.password.hasError('required') && (f.password.dirty || f.password.touched)">
+                            Password is required</div>
+                        <div *ngIf="f.password.invalid && f.password.hasError('minlength')">Password must be at least 6
+                            characters</div>
+                    </div>
+                    <div class="forgot">
+                        <a href="/forgot-password" class="ff-Agrandir">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="btn ff-Agrandir fw-bold">SIGN IN</button>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="info">
+                    <div class="left inline ff-Larsseit">Copyright © 2022 Revival Health</div>
+                    <div class="right inline ff-Larsseit">
+                        <a href="#">Terms & Conditions</a> | <a href="#">Privacy policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-footer col-12 col-md-6 col-lg-6 col-xl-10">
+            <div class="text-f">Your devotion and<br/>care bring hope.</div>
+            <div class="img-f">
+                <img src="/assets/images/icons/ic-login-narrow.svg" >
+            </div>
+        </div>
+    </div>
+</div>

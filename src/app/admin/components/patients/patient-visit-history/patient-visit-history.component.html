@@ -1,0 +1,24 @@
+<div class="visit-history">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>DOCTOR NAME</th>
+        <th>DATE</th>
+        <th>TIME</th>
+        <th>STATUS</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let visitHistory of visitHistories;">
+        <td>{{visitHistory.doctorName}}</td>
+        <td>{{visitHistory.time | date: 'MMM dd, yyyy'}}</td>
+        <td>{{visitHistory.time | date: 'hh:mm a'}} - {{visitHistory.endTime | date: 'hh:mm a'}}</td>
+        <td>{{visitHistory.status}}</td>
+        <td>
+          <a href="javascript:void(0)" (click)="onOpenSoapPopup(visitHistory.appointmentId)">Add Note</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

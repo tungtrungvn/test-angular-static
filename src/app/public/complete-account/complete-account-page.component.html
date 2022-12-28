@@ -1,0 +1,50 @@
+<!-- <div fxLayout="row" fxLayoutAlign="center center" class="login-wrapper">
+    <div fxFlex.gt-lg="40" fxFlex.gt-md="40" fxFlex.gt-xs="100" fxFlex="100">
+        <mat-card class="login-form">
+            <mat-card-header class="text-center">
+                <img [src]="imgLogo" alt="Move78 Admin Site" class="logo">
+            </mat-card-header>
+            <mat-card-content>
+                <h1 class="text-center">Active Your Account</h1>
+                <form [formGroup]="activeForm" (ngSubmit)="onSubmit()">
+                    <mat-form-field>
+                        <mat-label>Full Name</mat-label>
+                        <input matInput placeholder="Full Name" name="fullname" formControlName="fullname">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>User Name <span class="error">*</span></mat-label>
+                        <input matInput readonly name="username" formControlName="username">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Phone <span class="error">*</span></mat-label>
+                        <input matInput readonly type="phone" name="phone" formControlName="phone">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Email <span class="error">*</span></mat-label>
+                        <input matInput readonly placeholder="Email" type="email" name="email" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password <span class="error">*</span></mat-label>
+                        <input matInput placeholder="Password" type="password" name="password"
+                            formControlName="password">
+                        <mat-error *ngIf="f.password.invalid && f.password.hasError('required')">Password is required
+                        </mat-error>
+                        <mat-error *ngIf="f.password.invalid && f.password.hasError('minlength')">Password must be at
+                            least 6 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Re-type Passwrod <span class="error">*</span></mat-label>
+                        <input matInput type="password" formControlName="confirmPassword" name="confirmPassword"
+                            placeholder="Confirm Password" />
+                        <mat-error *ngIf="f.confirmPassword.invalid && f.confirmPassword.hasError('required')">Confirm
+                            Password is required</mat-error>
+                        <mat-error *ngIf="f.confirmPassword.hasError('invalidMatching')">Confirm Password does not match
+                        </mat-error>
+                    </mat-form-field>
+                    <button [disabled]="activeForm.invalid" mat-raised-button color="primary"
+                        class="w-100 sign-in-btn">Active Account</button>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div> -->

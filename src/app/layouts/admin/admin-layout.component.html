@@ -1,0 +1,20 @@
+<div class="main-container" [ngClass]="{'p-0 bg-main': !isShowSidebar}">
+    <app-sidebar *ngIf="isShowSidebar" [isExpanded]="isExpanded" (setExpanded)="isExpanded = $event" (toggleSidebar)="isExpanded = !isExpanded">
+    </app-sidebar>
+
+    <div class="content h-100 flex-column d-flex" [ngClass]="{ 'sidebarExpanded': isExpanded }" *ngIf="isShowSidebar">
+        <app-header [isExpanded]="isExpanded" (setExpanded)="isExpanded = $event"></app-header>
+        <div #elementHeight class="flex-column d-flex flex-grow-1 overflow-hidden">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    <div [ngClass]="{ 'sidebarExpanded': isExpanded}" class="h-100 flex-column d-flex" *ngIf="!isShowSidebar">
+        <app-header></app-header>
+        <div #elementHeight class="flex-column d-flex flex-grow-1 overflow-hidden">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+

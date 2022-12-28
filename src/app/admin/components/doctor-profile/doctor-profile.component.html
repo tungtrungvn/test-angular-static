@@ -1,0 +1,179 @@
+<div class="account-details container-fluid mx-3 mb-3 pt-4 overflow-auto">
+  <div class="account-details__top d-flex flex-column">
+    <div class="justify-content-center justify-content-sm-between flex-column flex-sm-row row">
+      <div class="account-details__top-info d-flex flex-column flex-sm-row col-lg-8 col-12 col-sm-7 col-md-8">
+        <div class="avatar col-lg-3 col-sm-4 col-12">
+          <div class="d-flex d-sm-block justify-content-center avatar-block position-relative">
+            <img src="{{profileForm.value.avatar}}" class="avatar-hover" alt="Avatar"
+                 *ngIf="!newAvatar && profileForm.value?.avatar" />
+            <img src="assets/images/users/no-avatar.png" class="avatar-hover" alt="Avatar"
+                 *ngIf="!newAvatar && !profileForm.value?.avatar" />
+            <img src="assets/images/change-image.png" class="avatar-edit" alt="Avatar" (click)="fileInput.click()" />
+            <img [src]="newAvatar" alt="Avatar" *ngIf="newAvatar" />
+          </div>
+          <input style="display: none" type="file" accept="image/png, image/jpg, image/jpeg, image/bmp, image/gif"
+                 (change)="onFileChanged($event)" #fileInput>
+        </div>
+        <div class="name text-center text-sm-start col-lg-9 col-sm-8 ms-sm-3 ms-0 col-12">
+          <label>{{f.firstName.value}} {{f.lastName.value}}</label>
+          <p>{{specialty}}</p>
+        </div>
+      </div>
+      <div class="account-details__top-button col-lg-4 col-12 col-sm-5 col-md-4 my-sm-0 my-2">
+        <button type="button" mat-stroked-button class="btn btn-blue" *ngIf="!editMode"
+                (click)="startEditMode()">Edit</button>
+        <button type="button" mat-stroked-button class="btn btn-cancle" *ngIf="editMode"
+                (click)="cancleEditMode()">Cancel</button>
+        <button type="button" mat-stroked-button class="btn btn-blue" *ngIf="editMode" (click)="editForm.onSubmit($event)">Save</button>
+      </div>
+    </div>
+    <div class="justify-content-start row">
+      <div class="email col-lg-6 col-sm-6 col-12">
+        <label class="col-3">Email</label>
+        <input class="col-9" [value]="profileForm.value.email" />
+      </div>
+      <div class="change-password text-center text-sm-start col-lg-6 col-sm-6 col-12">
+        <a class="pointer" (click)="changePassword()">Change password</a>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <span class="error-show" *ngIf="isHasInvalid">These fields are required and cannot be empty.</span>
+  <span class="error-show" *ngIf="isHasError && fieldError === 'npi'">Please make sure you’ve entered a full 10 digit NPI
+    number.</span>
+  <span class="error-show" *ngIf="isHasError && fieldError === 'phone'">Please make sure you’ve entered a full 10 digit phone
+    number.</span>
+  <span class="error-show" *ngIf="isHasError && fieldError === 'fax'">Please make sure you’ve entered a full 10 digit fax
+    number.</span>
+  <div class="account-details__bottom row">
+    <form [formGroup]="profileForm" #editForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+      <div class="account-details__bottom-group row">
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">First Name</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <input matInput #firstName="matInput" formControlName="firstName" [readonly]="!editMode"
+              [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Last Name</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <input matInput #lastName="matInput" formControlName="lastName" [readonly]="!editMode"
+              [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3" for="birthday">Birthday</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <input matInput [max]="today" [matDatepicker]="picker" formControlName="birthday" (click)="picker.open()"
+              [readonly]="!editMode" [disabled]="!editMode" [class.disable-input]="!editMode" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Gender</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <mat-select formControlName="gender" [class.disable-input]="!editMode" [disabled]="!editMode">
+              <mat-option value="1">Male</mat-option>
+              <mat-option value="2">Female</mat-option>
+              <mat-option value="0">Unknown</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <hr>
+      <div class="account-details__bottom-group row">
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Clinic Name</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <input matInput formControlName="clinicName" [readonly]="!editMode" [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Speciality</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <mat-select formControlName="specialty" [class.disable-input]="!editMode" [disabled]="!editMode">
+              <mat-option value="">No data</mat-option>
+              <mat-option *ngFor="let spt of specialties" [value]="spt.value">{{spt.text}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Phone</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <input type="text" maxlength="10" matInput formControlName="phone" [readonly]="!editMode" oninput="
+              javascript: if (Number(this.value.slice(-1)) !== 0 && !Number(this.value.slice(-1)))
+               this.value = this.value.slice(0, -1);" (keyup)="isTyping()" [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Fax</label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <input type="text" maxlength="10" matInput formControlName="fax" [readonly]="!editMode" oninput="
+            javascript: if (Number(this.value.slice(-1)) !== 0 && !Number(this.value.slice(-1)))
+             this.value = this.value.slice(0, -1);" (keyup)="isTyping()" [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+      </div>
+      <hr>
+      <div class="account-details__bottom-group row">
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Address</label>
+          <mat-form-field appearance="outline" class="custom-input col-9" [class.error-border]="isHasInvalid && f.address.invalid">
+            <input matInput formControlName="address" [(ngModel)]="addressDetail.address"
+              (keyup)="getGoogleAddress(f.address.value)" [readonly]="!editMode" [class.disable-input]="!editMode"
+              [matAutocomplete]="auto" [errorStateMatcher]="matcher" />
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let address of autocompleteAddress" [value]="address.description"
+                (click)="getAddressDetail(address.place_id)">
+                {{address.description}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">City</label>
+          <mat-form-field appearance="outline" class="custom-input col-9" [class.error-border]="isHasInvalid && f.city.invalid">
+            <input matInput formControlName="city" [(ngModel)]="addressDetail.city" [readonly]="!editMode"
+              [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">State</label>
+          <mat-form-field appearance="outline" class="custom-input col-9" [class.error-border]="isHasInvalid && f.state.invalid">
+            <input matInput formControlName="state" [(ngModel)]="addressDetail.state" [readonly]="!editMode"
+              [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">Zip</label>
+          <mat-form-field appearance="outline" class="custom-input col-9" [class.error-border]="isHasInvalid && f.zipCode.invalid">
+            <input matInput formControlName="zipCode" [(ngModel)]="addressDetail.zipCode" [readonly]="!editMode"
+              [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+      </div>
+      <hr>
+      <div class="account-details__bottom-group row">
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">NPI</label>
+          <mat-form-field appearance="outline" class="custom-input col-9" [class.error-border]="isHasInvalid && f.npi.invalid">
+            <input type="text" maxlength="10" matInput formControlName="npi" [readonly]="!editMode" oninput="
+            javascript: if (Number(this.value.slice(-1)) !== 0 && !Number(this.value.slice(-1)))
+             this.value = this.value.slice(0, -1);" (keyup)="isTyping()" [class.disable-input]="!editMode" [errorStateMatcher]="matcher" />
+          </mat-form-field>
+        </div>
+        <div class="form-group" class="col-lg-6">
+          <label class="col-3">
+            <p>DEA</p>
+            <p class="optional">(Optional)</p>
+          </label>
+          <mat-form-field appearance="outline" class="custom-input col-9">
+            <input matInput formControlName="dea" [readonly]="!editMode" [class.disable-input]="!editMode" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

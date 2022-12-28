@@ -1,0 +1,17 @@
+<div class="video-questions">
+  <div class="icon">
+    <img width="30" src="assets/images/icons/ic-questionnaire.png"/> <span>Questionaire</span>
+  </div>
+  <div class="questions">
+    <div class="detail" *ngFor="let item of questionAnswers">
+      <div class="title">
+        {{item.question}}
+      </div>
+      <div class="answers">
+          <div class="answer" *ngFor="let answer of item.answers">
+              {{answer}}
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

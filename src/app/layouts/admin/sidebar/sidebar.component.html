@@ -1,0 +1,118 @@
+<div class="sidebar d-flex flex-column" [ngClass]="{ 'expanded': isExpanded }">
+  <div class="head">
+    <a class="logo" href="index.html">
+      <img src="assets/images/short-logo.png" width="40" alt="Move78">     
+    </a>
+    <div class="logo-title">MOVE 78</div>
+    
+    <a class="lnk-expand" (click)="handleSidebarToggle()"><img src="assets/images/icons/ic-expand.png" /></a>
+    <hr />
+  </div>
+  <div class="sidebar-content overflow-auto flex-grow-1">
+    <div class="link">
+      <div class="content-item" [routerLink]="['/appointment']" [routerLinkActive]="'active'">
+        <a class="lnk">
+          <div class="icon">
+            <img width="19" src="assets/images/icons/ic-menu-appointment.png" />
+          </div>
+          <div class="title">Appointment</div>
+        </a>
+      </div>
+    </div>
+    <div class="link">
+      <div class="content-item" [routerLink]="['/chat']" [routerLinkActive]="'active'">
+        <a class="lnk">
+          <div class="icon">
+            <img width="18" src="assets/images/icons/ic-menu-chat.png" />
+          </div>
+          <div class="title">Chat</div>
+          <div class="menu-unread" *ngIf="totalUnreadChat > 0">{{totalUnreadChat | numberUnread}}</div>
+        </a>
+      </div>
+    </div>
+    <!-- <div class="link">
+      <div class="content-item" [routerLink]="['/patients']" [routerLinkActive]="'active'">
+        <a class="lnk">
+          <div class="icon">
+            <img width="13" src="assets/images/icons/ic-menu-patient.png" />
+          </div>
+          <div class="title">Patients</div>
+        </a>
+      </div>
+    </div> -->
+    <div class="link">
+      <div class="content-item" [routerLink]="['/scheduler']" [routerLinkActive]="'active'">
+        <a class="lnk" [routerLink]="['/scheduler']" [routerLinkActive]="'active'">
+          <div class="icon">
+            <img width="21" src="assets/images/icons/ic-menu-scheduler.png" />
+          </div>
+          <div class="title">Scheduler</div>
+        </a>
+      </div>
+    </div>
+
+
+
+    <div class="link">
+      <div class="content-item" [routerLink]="['/prescription-history']" [routerLinkActive]="'active'">
+        <a class="lnk" style="margin-left: -10px;" [routerLink]="['/prescription-history']" [routerLinkActive]="'active'">
+          <div class="icon">
+            <img width="21" src="assets/images/eazyscript-menu-item.png" style="width:130px !important" />
+          </div>
+        </a>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="link with-children">
+      <div class="content-item parent">
+        <div class="title" style="font-weight: 900 !important;">ACCOUNT</div>
+      </div>
+      <div class="children">
+        <div class="link">
+          <div class="content-item" [routerLink]="['/settings']" [routerLinkActive]="'active'">
+            <a class="lnk" [routerLink]="['/settings']" [routerLinkActive]="'active'">
+              <div class="icon">
+                <img width="20" src="assets/images/icons/ic-menu-setting.png" />
+              </div>
+              <div class="title">Settings</div>
+            </a>
+          </div>
+        </div>
+        <div class="link">
+          <div class="content-item" [routerLink]="['/logout']" [routerLinkActive]="'active'">
+            <a class="lnk" [routerLink]="['/logout']" [routerLinkActive]="'active'">
+              <div class="icon">
+                <img width="16" src="assets/images/icons/ic-menu-logout.png" />
+              </div>
+              <div class="title">Logouts</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar-footer-content">
+    <hr />
+    <div class="sidebar-footer">
+      <div class="row">
+        <div class="col-md-3 col-3 emergency">
+          <a href="#">
+            <img width="36" src="assets/images/icons/ic-emergency.png" alt="Emergency">
+          </a>
+        </div>
+        <div class="col-md-9 col-9 hotlines">
+          <div class="title">
+            Emergency Hotlines:
+          </div>
+          <div class="tel">
+            <a href="tel:+234 92 928 2891">+234 92 928 2891</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

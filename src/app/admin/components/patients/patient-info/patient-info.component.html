@@ -1,0 +1,111 @@
+<div class="patient-info overflow-hidden" *ngIf="patientInfo">
+  <div class="row flex-grow-1 w-100">
+    <div class="d-flex col-md-4 flex-column flex-sm-row flex-md-column col-12">
+      <div class="personal-info d-flex flex-column flex-grow-1 bg-item overflow-auto">
+        <div class="overflow-auto flex-grow-1">
+          <div class="general flex-grow-1">
+            <div class="avatar">
+              <img [src]="(patientInfo.avatarUrl ?? noAvatar) | safe: 'url'" width="80" height="80">
+            </div>
+            <div class="name">{{patientInfo.firstName}} {{patientInfo.lastName}}</div>
+            <div class="status">Active</div>
+          </div>
+          <div class="other-info flex-grow-1">
+            <table class="table">
+              <tbody>
+              <tr>
+                <td class="item-title">Gender</td>
+                <td class="desc">{{patientInfo.gender === 0 ? 'Male': 'Female'}}</td>
+              </tr>
+              <tr>
+                <td class="item-title">Age</td>
+                <td class="desc"> {{ patientInfo.birthday | birthdate }} years old</td>
+              </tr>
+              <tr>
+                <td class="item-title">Height</td>
+                <td class="desc">{{patientInfo.height | height}}</td>
+              </tr>
+              <tr>
+                <td class="item-title">Weight</td>
+                <td class="desc">{{patientInfo.weight + ' lb'}}</td>
+              </tr>
+              <tr>
+                <td class="item-title">Waist</td>
+                <td class="desc">{{patientInfo.waist + ' in'}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="my-2 d-none d-md-block clearfix"></div>
+      <div class="vitals d-flex bg-item">
+        <div class="overflow-auto flex-grow-1">
+          <div class="title">Vitals</div>
+          <div class="vital-items">
+            <table class="table">
+              <tbody>
+              <tr>
+                <td class="item-title">Temp</td>
+                <td class="desc">{{getVitalDetail('8310-5')?.value}} {{getVitalDetail('8310-5')?.uom}}</td>
+                <td class="date">{{getVitalDetail('8310-5')?.issued | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td class="item-title">SPO2</td>
+                <td class="desc">{{getVitalDetail('20564-1')?.value}} {{getVitalDetail('20564-1')?.uom}}</td>
+                <td class="date">{{getVitalDetail('20564-1')?.issued | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td class="item-title">HR</td>
+                <td class="desc">{{getVitalDetail('8867-4')?.value}} {{getVitalDetail('8867-4')?.uom}}</td>
+                <td class="date">{{getVitalDetail('8867-4')?.issued | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td class="item-title">BP</td>
+                <td class="desc">{{getVitalDetail('85354-9')?.valueToStr}} {{getVitalDetail('85354-9')?.uom}}</td>
+                <td class="date">{{getVitalDetail('85354-9')?.issued | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+              <tr>
+                <td class="item-title">Glucose</td>
+                <td class="desc"></td>
+                <td class="date"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8 col-12 mt-md-0 mt-3 ps-md-0">
+      <div class="detail-info d-flex">
+        <mat-tab-group class="col-12" [selectedIndex]="0" (selectedTabChange)="onMedicationHistoryClick($event)">
+          <mat-tab label="Health Data">
+            <div class="bg-item height-bottom d-flex">
+              <app-patient-health-data class="flex-grow-1 overflow-auto" [firebaseId]="patientInfo.firebaseUserId"></app-patient-health-data>
+            </div>
+          </mat-tab>
+          <mat-tab label="General">
+            <div class="bg-item height-bottom h-100 d-flex">
+              <app-patient-general-info class="flex-grow-1 overflow-auto" [patientInfo]="patientInfo"></app-patient-general-info>
+            </div>
+          </mat-tab>
+          <mat-tab label="Insurance Info">
+            <div class="bg-item height-bottom">
+              <app-patient-insurance-info [patientInfo]="patientInfo"></app-patient-insurance-info>
+            </div>
+          </mat-tab>
+          <mat-tab label="Visit History">
+            <div class="bg-item height-bottom h-100 d-flex overflow-auto">
+              <app-patient-visit-history class="flex-grow-1 overflow-auto" [patientInfo]="patientInfo" [visitHistories]="visitHistories"></app-patient-visit-history>
+            </div>
+          </mat-tab>
+          <mat-tab label="Medication History">
+            <div class="bg-item height-bottom">
+              <app-patient-medication-history [patientInfo]="patientInfo"></app-patient-medication-history>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>

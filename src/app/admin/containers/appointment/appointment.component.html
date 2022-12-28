@@ -1,0 +1,28 @@
+<div #appointmentPage class="appointment-page h-100 mt-0 d-flex flex-column" *ngIf="!viewUserId">
+  <div #appFilter class="appointment-filter">
+    <app-appointment-filter [range]="range" 
+      (rangeDateChange)="onDateRangeChange($event)"
+      (statusChange)="onStatusChange($event)"
+      [statusSelected]="status"
+      (filterAppt)="filterAppt($event)"
+    >
+    </app-appointment-filter>
+  </div>
+  <div #appList class="appointment-content pb-3 flex-grow-1">
+    <app-appointment-list
+      class="h-100 d-flex"
+      [appointments]="appointments" 
+      [status]="status"
+      [hasData]="hasData"
+      [isProcessing]="isProcessing"
+      (viewProfile)="onViewProfile($event)"
+      (scroll)="onScroll()"
+      (cancelAppointment)="onCancelAppointment($event)"    
+    >
+    </app-appointment-list>
+  </div>
+</div>
+
+<div class="h-100 d-flex" *ngIf="viewUserId">
+  <app-patient-info class="flex-grow-1 d-flex w-100" [userId]="viewUserId"></app-patient-info>
+</div>

@@ -1,0 +1,50 @@
+<div class="message-lst d-flex flex-column">
+  <div class="title" [ngClass]="showSearch ? 'p-0 pe-2 ps-2' : ''">
+    <h4 *ngIf="!showSearch" class="h4 d-flex justify-content-between align-items-end">
+      Messages
+      <button class="text-end search-mes" (click)="triggerSearch()" mat-icon-button>
+        <img src="assets/images/search.svg"/>
+      </button>
+    </h4>
+    <div class="search-block d-flex align-items-center justify-content-between" *ngIf="showSearch">
+      <mat-form-field class="custom-input" appearance="outline">
+        <input type="text"
+               aria-label="Number"
+               placeholder="Search"
+               matInput
+               [formControl]="searchControl">
+      </mat-form-field>
+      <button (click)="triggerSearch()" mat-button color="primary">Cancel</button>
+    </div>
+  </div>
+  <div class="no-content flex-grow-1" *ngIf="!hasData">
+    <div class="no-content-img">
+      <img src="assets/images/no-message.png" width="150">
+    </div>
+    <div class="no-content-desc">
+      NO CHAT HISTORY
+    </div>
+  </div>
+  <div class="message-lst-items flex-grow-1" *ngIf="hasData">
+    <div *ngFor="let item of filteredOptions | async">
+      <div class="lnk p-3 px-lg-2 py-lg-3 p-xl-3 d-flex align-items-center" (click)="onSelectChannel(item)" [ngClass]="{'message-lst-item': channelSelected?.channelId === item.channelId}">
+        <div class="channel-avatar inline">
+          <img width="30" src="{{item.channelAvatar}}" alt="avatar" class="img-circle-small">
+          <div class="status"></div>
+        </div>
+        <div class="channel-content text-truncate inline flex-grow-1">
+          <div class="channel-content-lst-detail mb-1">
+            <div class="c-left inline name">{{item.channelName}}</div>
+            <div class="c-right inline time">{{item?.lastMessage?.timestamp | date: 'hh:mm a'}}</div>
+          </div>
+          <div class="channel-content-lst-detail ">
+            <div class="c-left inline overflow">{{item?.lastMessage?.text}}</div>
+            <div class="c-right inline unread-message" *ngIf="item?.totalUnreadMessage">
+              {{item?.totalUnreadMessage}}</div>
+          </div>
+        </div>
+      </div>
+      <hr [class.transparent]="channelSelected?.channelId === item.channelId" class="line-item" />
+    </div>
+  </div>
+</div>

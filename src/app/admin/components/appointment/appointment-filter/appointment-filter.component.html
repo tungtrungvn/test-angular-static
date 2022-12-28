@@ -1,0 +1,49 @@
+<div class="filter row justify-content-between align-items-center">
+  <mat-accordion class="expan-custom">
+    <mat-expansion-panel [expanded]="hidePanel">
+      <mat-expansion-panel-header *ngIf="!hidePanel" collapsedHeight="30">
+        <mat-panel-title>
+          Filter
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="title flex-grow-1 col-md-5 col-lg-6">
+          <div class="filter-info d-flex flex-lg-wrap flex-wrap flex-md-wrap flex-xxl-nowrap align-items-center">
+            <div class="d-flex justify-content-start align-items-center me-sm-4">
+              <h4 class="h4 text-truncate filter-title mb-0">{{statusSelected === 'UpComing' ? 'Upcoming': statusSelected ===
+              'Completed' ? 'Completed' : 'Cancelled'}} Appointments</h4>
+              <div class="filter-select flex-grow-1 ms-2 mb-1">
+                <mat-select class="appointment-dropdown" disableOptionCentering [(value)]="statusSelected"
+                            (selectionChange)="onStatusChange($event)">
+                  <mat-option value="UpComing">UPCOMING</mat-option>
+                  <mat-option value="Cancelled">CANCELED</mat-option>
+                  <mat-option value="Completed">COMPLETED</mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="total flex-grow-1 ff-ProximaNova text-truncate"> (Today {{totalAppointmentToday}} appointments)</div>
+          </div>
+          <div class="filter-date-info mt-1" *ngIf="range">
+            {{range.value.start | date: 'dd MMM yyyy'}} - {{range.value.end | date: 'dd MMM yyyy'}}
+          </div>
+        </div>
+        <div class="date-range flex-column flex-sm-row mt-md-0 mt-2 col-md-7 col-lg-6 f-right d-flex flex-grow-1 align-items-center">
+          <mat-form-field appearance="outline" class="custom-input search-text col-md-6">
+            <input matInput placeholder="Search by name" [formControl]='patient'/>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="custom-input col-md-6" *ngIf="range">
+            <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+              <input matStartDate formControlName="start" placeholder="Start date">
+              <input matEndDate formControlName="end" placeholder="End date" (dateChange)="onEndDateChange($event)">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+
+            <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

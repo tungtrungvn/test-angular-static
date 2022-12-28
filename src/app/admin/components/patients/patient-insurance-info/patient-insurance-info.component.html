@@ -1,0 +1,21 @@
+<div class="insurance">
+  <div class="insurance-title m-b-15">
+    INSURANCE CARD
+  </div>
+  <div class="info" *ngIf="patientInfo && patientInfo?.insuranceCard">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="title">Front Side</div>
+        <div class="desc">
+            <img src="{{patientInfo.insuranceCard?.frontSide}}" height="200" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="title">Back Side</div>
+        <div class="desc">
+          <img src="{{patientInfo.insuranceCard?.backSide}}" height="200" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

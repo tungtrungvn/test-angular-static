@@ -1,0 +1,82 @@
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.chat-page {
+  height: 100%;
+  ::ng-deep .img-circle-small {
+    width: 60px;
+    height: 60px;
+    border-top-left-radius: 50% 50%;
+    border-top-right-radius: 50% 50%;
+    border-bottom-right-radius: 50% 50%;
+    border-bottom-left-radius: 50% 50%;
+    margin-bottom: 2px;
+    &.detail {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  ::ng-deep .c-right {
+    float: right;
+  }
+
+  ::ng-deep .lnk {
+    cursor: pointer;
+    color: black;
+  }
+
+  ::ng-deep .inline {
+    display: inline-block;
+  }
+
+  ::ng-deep .my-custom-scrollbar {
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  .chat-lst {
+    display: inline-block;
+    &.expand-detail {
+      //width: 30%;
+    }
+    &.mobile-chat {
+    }
+  }
+
+  .detail-page {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    background: white;
+    border-radius: 20px;
+    filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.078));
+    
+    .chat-details {
+      width: 100%;
+      display: flex;
+      vertical-align: top;
+      &.expand-profile {
+        width: 50%;
+        @include media-breakpoint-down(sm) {
+          width: 0;overflow: hidden;
+        }
+      }
+    }
+    .chat-patient-profile {
+      display: none;
+      vertical-align: top;
+      &.active-profile {
+        display: inline-block;
+        width: 50%;
+        border-left: 1px solid #D3D3D3;
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+          border-left: 0;
+        }
+      }
+    }
+  }
+  
+}

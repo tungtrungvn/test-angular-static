@@ -1,0 +1,187 @@
+<div class="container-fluid video-page h-100 d-flex" (window:beforeunload)="handleBeforeWindowUnload($event)"
+  *ngIf="!showPatientProfile">
+  <div class="row h-100-auto flex-grow-1 w-100">
+    <div class="col-md-6 h-100 col-lg-8 col-12 d-flex flex-column justify-content-end p-0" [class.d-none]="showChat" [class.d-md-flex]="showChat" *ngIf="session" #videoContainer>
+      <div class="w-100 video-call position-relative d-flex flex-column justify-content-end flex-grow-1" id="divVideo">
+        <div #waitingScreen
+          class="w-100 h-100 bg-dark d-flex align-items-center justify-content-center position-absolute">
+          <h5 class="text-white">{{ waitingMessage }}</h5>
+        </div>
+        <app-subscriber *ngFor="let stream of streams" [stream]="stream" [session]="session" #videoSubscriber
+          (audioIsOnMuted)="subscriberAudioIsMuted($event)"></app-subscriber>
+        <app-publisher [session]="session" #videoPublisher id="videoPublisher" class="position-absolute"
+          (audioIsOnMuted)="publisherAudioIsMuted($event)"></app-publisher>
+      </div>
+      <div class="d-flex position-relative justify-content-center video-control flex-row bg-white" #videoToolbar>
+        <div class="d-flex h-100 position-absolute align-items-center time">
+          <ul class="ps-0">
+            <li class="d-flex align-items-center justify-content-end">
+              <span>{{ counter }}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex-fill d-flex align-items-center justify-content-center justify-content-lg-center justify-content-md-end">
+          <button class="p-0 btn-call-icon btn-audio border-0 mx-2 mx-sm-3" (click)="toggleAudio()">
+            <svg id="mic_icon_2_" xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 87.899 87.899">
+              <path id="Path_683" data-name="Path 683"
+                d="M46.77,24.52A16.968,16.968,0,0,1,30.734,35.966,17.731,17.731,0,0,1,14.15,24.52M30.46,44.209V36.2m-7.481,9.356H37.687"
+                transform="translate(13.489 23.375)" fill="none" stroke="#252036" stroke-miterlimit="10"
+                stroke-width="1.875" />
+              <path id="Path_684" data-name="Path 684"
+                d="M38.719,19.939v10.9a10.9,10.9,0,0,1-21.8,0v-10.9a10.9,10.9,0,1,1,21.8,0Z"
+                transform="translate(16.13 8.618)" fill="none" stroke="#252036" stroke-miterlimit="10"
+                stroke-width="1.875" />
+              <line *ngIf="!audioIsOn" id="Line_284" data-name="Line 284" x1="49.653" y2="49.653"
+                transform="translate(19.123 16.461)" fill="none" stroke="#252036" stroke-miterlimit="10"
+                stroke-width="1.875" />
+            </svg>
+          </button>
+          <button class="p-0 btn-call-icon btn-video border-0 mx-2 mx-sm-3" (click)="toggleVideo()">
+            <svg id="Group_1299" data-name="Group 1299" xmlns="http://www.w3.org/2000/svg" width="45" height="45"
+              viewBox="0 0 87.898 87.899">
+              <path id="Path_685" data-name="Path 685"
+                d="M101.673,43.2H82.492a8.745,8.745,0,0,1-8.712-8.712V24.092a8.745,8.745,0,0,1,8.712-8.712h19.181a8.745,8.745,0,0,1,8.712,8.712V34.483A8.707,8.707,0,0,1,101.673,43.2Z"
+                transform="translate(-52.509 14.662)" fill="none" stroke="#252036" stroke-miterlimit="10"
+                stroke-width="1.875" />
+              <path id="Path_686" data-name="Path 686" d="M92.53,23.291l8.731-7.071V39.738L92.53,33.683Z"
+                transform="translate(-34.634 15.463)" fill="none" stroke="#252036" stroke-linejoin="round"
+                stroke-miterlimit="10" stroke-width="1.875" />
+              <line *ngIf="!videoIsOn" id="Line_281" data-name="Line 281" x1="49.653" y2="49.653"
+                transform="translate(19.123 19.123)" fill="none" stroke="#252036" stroke-miterlimit="10"
+                stroke-width="1.875" />
+            </svg>
+          </button>
+          <button class="p-0 btn-call-icon btn-call border-0 mx-2 mx-sm-3" (click)="dropCall()">
+            <svg id="phone_icon_1_" xmlns="http://www.w3.org/2000/svg" width="45" height="45"
+              viewBox="0 0 87.899 87.899">
+              <circle *ngIf="isInCall" id="Ellipse_261" data-name="Ellipse 261" cx="43.949" cy="43.949" r="43.949"
+                fill="#e3394c" />
+              <path *ngIf="isInCall" id="Path_682" data-name="Path 682"
+                d="M224.563,16.03c-15.177,0-27.463,6.368-27.463,14.2v4.239a2.3,2.3,0,0,0,2.4,2.422l9.259-1a2.933,2.933,0,0,0,2.461-3.028v-3.3a2.367,2.367,0,0,1,1.641-2.344,37.562,37.562,0,0,1,23.44,0,2.408,2.408,0,0,1,1.641,2.344v3.3A2.95,2.95,0,0,0,240.4,35.9l9.259,1a2.289,2.289,0,0,0,2.4-2.422V30.23C252.027,22.4,239.741,16.03,224.563,16.03Z"
+                transform="translate(-180.614 15.281)" fill="none" stroke="#fff" stroke-miterlimit="10"
+                stroke-width="1.5" />
+              <circle *ngIf="!isInCall" id="Ellipse_261" data-name="Ellipse 261" cx="43.949" cy="43.949" r="43.949"
+                fill="#86d75e" />
+              <path *ngIf="!isInCall" id="Path_682" data-name="Path 682"
+                d="M224.563,16.03c-15.177,0-27.463,6.368-27.463,14.2v4.239a2.3,2.3,0,0,0,2.4,2.422l9.259-1a2.933,2.933,0,0,0,2.461-3.028v-3.3a2.367,2.367,0,0,1,1.641-2.344,37.562,37.562,0,0,1,23.44,0,2.408,2.408,0,0,1,1.641,2.344v3.3A2.95,2.95,0,0,0,240.4,35.9l9.259,1a2.289,2.289,0,0,0,2.4-2.422V30.23C252.027,22.4,239.741,16.03,224.563,16.03Z"
+                transform="translate(183.059 223.267) rotate(-135)" fill="#fff" stroke="#fff" stroke-miterlimit="10"
+                stroke-width="1.5" />
+            </svg>
+          </button>
+          <button class="p-0 btn-call-icon btn-zoom border-0 mx-2 mx-sm-3" (click)="openFullscreen()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 42.659 42.659">
+              <g id="Group_3958" data-name="Group 3958" transform="translate(-918.671 -1335.493)" opacity="0.8">
+                <path id="Path_28418" data-name="Path 28418" d="M10.5,10.5l15,15" transform="translate(934.5 1351.322)"
+                  fill="none" stroke="#252036" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.88" />
+                <path id="Path_28419" data-name="Path 28419" d="M25.5,10.5v15h-15" transform="translate(934.5 1351.322)"
+                  fill="none" stroke="#252036" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.88" />
+                <path id="Path_28420" data-name="Path 28420" d="M25.5,10.5l-15,15" transform="translate(909.5 1351.322)"
+                  fill="none" stroke="#252036" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.88" />
+                <path id="Path_28421" data-name="Path 28421" d="M25.5,25.5h-15v-15"
+                  transform="translate(909.5 1351.322)" fill="none" stroke="#252036" stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="1.88" />
+                <path id="Path_28422" data-name="Path 28422" d="M25.5,25.5l-15-15" transform="translate(909.5 1326.822)"
+                  fill="none" stroke="#252036" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.88" />
+                <path id="Path_28423" data-name="Path 28423" d="M10.5,25.5v-15h15" transform="translate(909.5 1326.822)"
+                  fill="none" stroke="#252036" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.88" />
+                <path id="Path_28424" data-name="Path 28424" d="M10.5,25.5l15-15" transform="translate(934.5 1326.322)"
+                  fill="none" stroke="#252036" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.88" />
+                <path id="Path_28425" data-name="Path 28425" d="M10.5,10.5h15v15" transform="translate(934.5 1326.322)"
+                  fill="none" stroke="#252036" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.88" />
+              </g>
+            </svg>
+          </button>
+          <button (click)="switchBetweenVideoAndChat()" class="position-absolute end-0 d-flex align-items-center border-0 mx-1 mx-sm-3 d-md-none message-btn btn-zoom" aria-label="Example icon button with a delete icon">
+            <mat-icon>chat_bubble_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-4 col-12 d-md-flex flex-column chat-box h-100" [ngClass]="showChat ? 'd-flex' : 'd-none'">
+      <div class="w-100 h-140px position-relative">
+        <div class="bottom-0 top-0 end-0 start-0 prescription w-100 d-flex flex-column position-absolute">
+          <div class="flex-fill p-3 position-absolute top-0 end-0 start-0">
+            <div class="align-self-start fw-bold">Prescription</div>
+            <div class="align-self-start">
+              Don't forget to add prescriptions to the patient
+            </div>
+          </div>
+          <div class="flex-fill p-3 d-flex position-absolute bottom-0 end-0 start-0 justify-content-end" style="z-index:999">
+            <button class="align-self-end" (click)="addPrescription()">Add prescription</button>
+          </div>
+        </div>
+
+        <div class="w-100 h-100 prescription-bg position-absolute">
+          <img src="assets/images/health-prescription.png" />
+        </div>
+      </div>
+      <div class="items">
+        <mat-tab-group class="h-100" [selectedIndex]="0">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <button >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16.78" height="18" viewBox="0 0 22.78 24"><path id="ic_chat_bubble_outline_24px" d="M22.5,2H4.278A2.348,2.348,0,0,0,2,4.4V26l4.556-4.8H22.5a2.348,2.348,0,0,0,2.278-2.4V4.4A2.348,2.348,0,0,0,22.5,2Zm0,16.8H6.556L4.278,21.2V4.4H22.5Z" transform="translate(-2 -2)" fill="#333"></path></svg>
+              </button>
+            </ng-template>
+            <div class="bg-item h-100 d-flex height-bottom">
+              <app-video-conversation
+                      class="h-100 flex-grow-1 w-100"
+                      [scrollToBottom]="showChat"
+                      [session]="session"
+              ></app-video-conversation>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <button >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path id="ic_filter_24px" d="M17.32,11.135,14.32,15l-2.138-2.575-3,3.851h12ZM3.182,5.364H1V22.818A2.188,2.188,0,0,0,3.182,25H20.636V22.818H3.182ZM22.818,1H7.545A2.188,2.188,0,0,0,5.364,3.182V18.455a2.188,2.188,0,0,0,2.182,2.182H22.818A2.188,2.188,0,0,0,25,18.455V3.182A2.188,2.188,0,0,0,22.818,1Zm0,17.455H7.545V3.182H22.818Z" transform="translate(-1 -1)" fill="#333"></path></svg>
+              </button>
+            </ng-template>
+            <div class="bg-item height-bottom">
+              <app-video-questions-info [appointmentId]="appointmentId"></app-video-questions-info>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <button >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path id="ic_insert_invitation_24px" d="M21.667,14.2H15v6h6.667ZM20.333,1V3.4H9.667V1H7V3.4H5.667A2.531,2.531,0,0,0,3.013,5.8L3,22.6A2.543,2.543,0,0,0,5.667,25H24.333A2.551,2.551,0,0,0,27,22.6V5.8a2.551,2.551,0,0,0-2.667-2.4H23V1Zm4,21.6H5.667V9.4H24.333Z" transform="translate(-3 -1)" fill="#333"></path></svg>
+              </button>
+            </ng-template>
+            <div class="bg-item height-bottom">
+              <app-video-soap (soapDataChange)="onSoapDataChange($event)"></app-video-soap>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <button (click)="gotoPatientProfile()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path id="ic_info_outline_24px" d="M12.8,20h2.4V12.8H12.8ZM14,2A12,12,0,1,0,26,14,12,12,0,0,0,14,2Zm0,21.6A9.6,9.6,0,1,1,23.6,14,9.613,9.613,0,0,1,14,23.6ZM12.8,10.4h2.4V8H12.8Z" transform="translate(-2 -2)" fill="#333"></path></svg>
+              </button>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="block-end-visit p-2 p-sm-0 p-md-2 d-flex justify-content-between justify-content-md-end flex-grow-0">
+        <button (click)="isPendingCall ? null : switchBetweenVideoAndChat()" class="my-md-3 my-sm-2 my-0 end-0 d-flex align-items-center border-0 mx-3 d-md-none message-btn btn-zoom" aria-label="Example icon button with a delete icon">
+          <svg id="Group_1299" data-name="Group 1299" xmlns="http://www.w3.org/2000/svg" width="45" height="45"
+               viewBox="0 0 87.898 87.899">
+            <path id="Path_685" data-name="Path 685"
+                  d="M101.673,43.2H82.492a8.745,8.745,0,0,1-8.712-8.712V24.092a8.745,8.745,0,0,1,8.712-8.712h19.181a8.745,8.745,0,0,1,8.712,8.712V34.483A8.707,8.707,0,0,1,101.673,43.2Z"
+                  transform="translate(-52.509 14.662)" fill="none" stroke="#252036" stroke-miterlimit="10"
+                  stroke-width="1.875" />
+            <path id="Path_686" data-name="Path 686" d="M92.53,23.291l8.731-7.071V39.738L92.53,33.683Z"
+                  transform="translate(-34.634 15.463)" fill="none" stroke="#252036" stroke-linejoin="round"
+                  stroke-miterlimit="10" stroke-width="1.875" />
+            <line *ngIf="!videoIsOn && isPendingCall" id="Line_281" data-name="Line 281" x1="49.653" y2="49.653"
+                  transform="translate(19.123 19.123)" fill="none" stroke="#252036" stroke-miterlimit="10"
+                  stroke-width="1.875" />
+          </svg>
+        </button>
+        <button class="btn-end-visit my-xl-3 my-sm-2 my-1" (click)="endVisit()">End Visit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="h-100 d-flex" *ngIf="showPatientProfile">
+  <app-patient-info class="flex-grow-1 d-flex w-100" [userId]="patientId"></app-patient-info>
+</div>

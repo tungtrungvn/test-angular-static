@@ -1,0 +1,21 @@
+.popup {
+  .m-right {
+    margin-right: 10px;
+  }
+  
+  h4 {
+    color: #47A7EE;
+  }
+  p {
+    text-align: left;
+  }
+  .btn-action-group {
+    float: right;
+    margin-top: 15px;
+    button {
+      color: #47A7EE;
+      border: 0;
+      background: none;
+    }
+  }
+}

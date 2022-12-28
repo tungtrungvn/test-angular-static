@@ -1,0 +1,114 @@
+.message-lst {
+  height: 100%;
+  position: relative;
+
+  .no-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+
+    .no-content-desc {
+      margin-top: 50px;
+      color: #33333380;
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    padding: 0 15px 10px 15px;
+    .search-mes {
+      scale: 0.9;
+    }
+    .search-block {
+      mat-form-field {
+        ::ng-deep {
+          .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+          .mat-form-field-infix {
+            width: auto;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .name {
+    font-weight: bold;
+  }
+
+  .time {
+    font-weight: bold;
+    font-size: 12px;
+    color: #B0B9B2;
+    float: right;
+    padding-left: 10px;
+  }
+
+  .overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    min-height: 20px;
+    white-space: nowrap;
+    max-width: 85%;
+  }
+
+  .message-lst-items {
+    //height: 75vh;
+    overflow-y: auto;
+
+    .line-item {
+      margin: 0 -5px;
+      border: 1px solid #D3D3D3;
+      width: 95%;
+      &.transparent {
+        border-color: transparent;
+      }
+    }
+    .title {
+      h2 {
+        font-weight: bold !important;
+      }
+    }
+    .lnk {
+      cursor: pointer;
+    }
+
+    .channel-avatar {
+      margin-right: 20px;
+    }
+
+    .channel-content {
+      position: relative;
+    }
+
+    .message-lst-item {
+      background: white;
+    }
+
+    .channel-content-lst-detail {
+      .unread-message {
+        width: 23px;
+        height: 23px;
+        background: #47A7EE;
+        text-align: center;
+        border-radius: 50%;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+        padding-top: 2px;
+      }
+    }
+  }
+
+  .add-channel {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
+}

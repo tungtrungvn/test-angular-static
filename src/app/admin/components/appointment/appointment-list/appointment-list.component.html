@@ -1,0 +1,65 @@
+<div class="appointment-list" (scroll)="onScroll($event)">
+  <div class="no-content" *ngIf="!hasData">
+    <div class="no-content-img">
+      <img src="assets/images/schedule.png" width="150">
+    </div>
+    <div class="no-content-desc">
+      THERE ARE NO {{status==='UpComing' ? 'UPCOMING': status === 'Completed' ? 'COMPLETED' :'CANCELED'}} APPOINTMENT SCHEDULED
+    </div>
+  </div>
+  <div class="row" *ngIf="hasData">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3" *ngFor="let item of appointments">
+      <div class="appointment-item position-relative">
+        <div class="patient-common-info">
+          <div class="patient-avatar">
+            <img width="110" height="110" src="{{item?.patient?.avatarUrl ? item?.patient?.avatarUrl : noAvatar}}" alt="avatar" class="img-circle-small">
+          </div>
+      
+          <div class="patient-content-item">
+            <div class="name">{{item?.patient?.firstName}} {{item?.patient?.lastName}}</div>
+            <div class="info text-truncate">{{item?.patient?.email}}</div>
+          </div>
+        </div>
+        <div class="appointment-item-info">
+          <div class="appointment-date">
+            <mat-icon>calendar_today_outlined</mat-icon>
+            <span>{{item.time | date: 'EEE, MMM dd, yyyy'}}</span>
+          </div>
+          <div class="appointment-date">
+            <mat-icon>access_time_outlined</mat-icon>
+            <span>{{item.time | date: 'hh:mm a'}} - {{item.endTime | date: 'hh:mm a'}}</span>
+          </div>
+        </div>
+        <div class="appointment-item-action">
+          <div class="row" *ngIf="item.status==='UpComing'">
+            <div class="col-sm-6 col-md-6 col-6">
+              <button class="button warn" *ngIf="item && !!item?.canStart" (click)="onStartCall(item)" >Start</button>
+              <button class="button" (click)="onCancelAppointment(item.id)" *ngIf="!item?.canStart">Cancel</button>
+            </div>
+            <div class="col-sm-6 col-md-6 col-6">
+              <button class="button primary" (click)="onViewProfile(item)">View Detail</button>
+            </div>
+          </div>
+          <div class="center" *ngIf="item.status==='Cancelled'">
+            <button class="button primary" (click)="onViewProfile(item)">View Detail</button>
+          </div>
+          <div class="row" *ngIf="item.status==='Completed'">
+            <div class="col-sm-6 col-md-6 col-6">
+              <button class="button warn" (click)="addPrescription(item?.patient?.eazyscriptId)">Prescribe</button>
+            </div>
+            <div class="col-sm-6 col-md-6 col-6">
+              <button class="button primary" (click)="onViewProfile(item)">View Detail</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="count-down" *ngIf="getElapsedTime(item) as elapsed">
+          {{elapsed.hours}}h {{elapsed.minutes}}m {{elapsed.seconds}}s
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center align-items-center" *ngIf="isProcessing">
+    <mat-spinner diameter="50"></mat-spinner>
+  </div>
+</div>

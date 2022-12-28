@@ -1,0 +1,68 @@
+@mixin create-font($name, $url, $weight, $style, $type: 'ttf') {
+  @font-face {
+    font-family: $name;
+    @if $type == 'ttf' {
+      src: $url format('truetype');
+    } @else {
+      src: $url format('opentype');
+    }
+    font-weight: $weight;
+    font-style: $style;
+  }
+}
+@include create-font('Larsseit', url('../fonts/Larsseit Regular/Larsseit Regular.ttf'), normal, normal);
+
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-Black.ttf'), 800, normal);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-BlackIt.ttf'), 800, italic);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-Bold.ttf'), bold, normal);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-BoldIt.ttf'), bold, italic);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-Light.ttf'), lighter, normal);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-LightIt.ttf'), lighter, italic);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-Medium.otf'), 500, normal, 'otf');
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-Regular.ttf'), normal, normal);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-RegularIt.ttf'), normal, italic);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-Semibold.ttf'), 600, normal);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-SemiboldIt.ttf'), 600, italic);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-Thin.ttf'), 300, normal);
+@include create-font('ProximaNova', url('../fonts/ProximaNova/ProximaNova-ThinIt.ttf'), 300, italic);
+
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-WideMedium.otf'), 600, normal, 'otf');
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-WideMediumItalic.otf'), 600, italic, 'otf');
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-Regular.otf'), normal, normal, 'otf');
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-Bold.otf'), bold, normal, 'otf');
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-BoldItalic.otf'), bold, italic, 'otf');
+@include create-font('Agrandir-medium', url('../fonts/Agrandir-V3/Agrandir-Medium.otf'), normal, normal, 'otf');
+@include create-font('Agrandir-medium', url('../fonts/Agrandir-V3/Agrandir-MediumItalic.otf'), normal, italic, 'otf');
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-Italic.otf'), normal, italic, 'otf');
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-Light.otf'), lighter, normal, 'otf');
+@include create-font('Agrandir', url('../fonts/Agrandir-V3/Agrandir-LightItalic.otf'), lighter, italic, 'otf');
+
+@include create-font('Google Sans', url('../fonts/GoogleSansTTF/GoogleSans-Bold.ttf'), bold, normal);
+@include create-font('Google Sans', url('../fonts/GoogleSansTTF/GoogleSans-BoldItalic.ttf'), bold, italic);
+@include create-font('Google Sans', url('../fonts/GoogleSansTTF/GoogleSans-Italic.ttf'), normal, italic);
+@include create-font('Google Sans', url('../fonts/GoogleSansTTF/GoogleSans-Medium.ttf'), 500, normal);
+@include create-font('Google Sans', url('../fonts/GoogleSansTTF/GoogleSans-MediumItalic.ttf'), 500, italic);
+@include create-font('Google Sans', url('../fonts/GoogleSansTTF/GoogleSans-Regular.ttf'), normal, normal);
+
+.ff-{
+  &Helvetica-Neue {
+    font-family: 'Helvetica Neue', "Google Sans", sans-serif !important;
+  }
+  &Agrandir {
+    font-family: 'Agrandir', "Google Sans", sans-serif !important;
+    &-medium {
+      font-family: 'Agrandir-medium', "Google Sans", sans-serif !important;
+    }
+  }
+
+  &ProximaNova {
+    font-family: 'ProximaNova', "Google Sans", sans-serif !important;
+  }
+
+  &Larsseit {
+    font-family: 'Larsseit', "Google Sans", sans-serif !important;
+  }
+  &GoogleSans {
+    font-family: "Google Sans", sans-serif !important;
+  }
+}

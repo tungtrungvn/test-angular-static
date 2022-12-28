@@ -1,0 +1,173 @@
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+.login-form {
+    background: linear-gradient(218.67deg, #EF295E 4.12%, #EF8429 98.52%);
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+    width: 100vw;
+
+    .background-2 {
+        height: 100%;
+        margin: 150px;
+        z-index: 1;
+        position: absolute;
+    }
+
+    .content {
+        z-index: 10;
+        padding: 3%;
+        margin: auto;
+        position: absolute;
+        top: 5%;
+        left: 15%;
+        bottom: 5%;
+        right: 15%;
+        border-radius: 15px;
+        background-image: url("/assets/images/background/bg-login-info.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        @include media-breakpoint-down(md) {
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        .logo {
+            position: absolute;left: 3%;
+            top: 3%;
+            img {
+                width: 100%;
+            }
+            @include media-breakpoint-down(md) {
+                position: static;
+            }
+        }
+        .content-info {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(11px);
+            border-top-right-radius: 18px;
+            border-bottom-right-radius: 18px;
+            padding: 20px;
+
+            .panel-body {
+                font-size: 15px;
+                padding: 0 10%;
+                .title-group {
+                    margin-top: 40px;
+                    @include media-breakpoint-down(xxl) {
+                        margin-top: 30px;
+                    }
+                    @include media-breakpoint-down(xl) {
+                        margin-top: 20px;
+                    }
+                    @include media-breakpoint-down(lg) {
+                        margin-top: 10px;
+                    }
+                    @include media-breakpoint-down(md) {
+                        margin-top: 0;
+                    }
+                }
+                .title-p {
+                    margin-bottom: 20px;
+                    @include media-breakpoint-down(xl) {
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .alert {
+                    padding: 5px;
+                    margin-bottom: 10px;
+                }
+
+                .form-group {
+                    margin-bottom: 15px;
+                }
+
+                button[type=submit] {
+                    width: 100%;
+                    background: #EF295E;
+                    color: white;
+                }
+
+                .forgot {
+                    text-align: right;
+                    margin-bottom: 15px;
+                }
+                @include media-breakpoint-down(md) {
+                    padding-top: 0%;
+                    .title-p {
+                        margin: 0;
+                    }
+                }
+            }
+
+            .panel-footer {
+                font-size: 10px;
+                color: #939393;
+                padding-top: 20px;
+                border-top: 1px solid #CECECE;
+                .inline {
+                    display: inline;
+                    a {
+                        text-decoration: none;
+                        color: #939393;
+                    }
+                    &.right {
+                        float: right;
+                    }
+                }
+                @include media-breakpoint-down(xl) {
+                    .info {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;justify-content: center;
+                    }
+                }
+                @include media-breakpoint-down(md) {
+                    padding-top: 10px;
+                }
+            }
+            @include media-breakpoint-down(md) {
+                height: auto;
+                border-radius: 18px;
+            }
+        }
+
+        .content-footer {
+            position: absolute;
+            font-weight: 700;
+            font-size: 60px;
+            line-height: 60px;
+            color: white;
+            bottom: 5%;
+            left: 3%;
+            pointer-events: none;
+            @include media-breakpoint-down(xxl) {
+                font-size: 42px;
+                line-height: 50px;
+            }
+            @include media-breakpoint-down(xl) {
+                font-size: 36px;
+            }
+            @include media-breakpoint-down(lg) {
+                font-size: 30px;
+                line-height: 40px;
+            }
+            @include media-breakpoint-down(md) {
+                position: static;
+                font-size: 2em;
+                text-align: center;
+                line-height: 34px;
+                .img-f {
+                    display: none;
+                }
+            }
+            @include media-breakpoint-down(sm) {
+                font-size: 1.5em;
+                line-height: 1.5em;
+            }
+        }
+    }
+}

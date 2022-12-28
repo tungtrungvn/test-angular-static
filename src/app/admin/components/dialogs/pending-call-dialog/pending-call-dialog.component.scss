@@ -1,0 +1,58 @@
+//@import url('https://fonts.googleapis.com/css2?family=Google+Sans&display=swap');
+
+.header-text {
+        color: #273943;
+        font-weight: 900 !important;
+        font-family: "Google Sans" !important;
+        font-size: 22px !important;
+        margin-top: 18px;
+}
+
+.patient-name {
+        font-size: 20px !important;
+        border-right: solid 1px #C5C5C5;
+        height: 24px;
+        padding-top: 1px;
+        padding-right: 2px;
+        margin-right: 5px;
+}
+
+.patient-info {
+        font-size: 16px !important;
+}
+
+.btn-cancel {
+        border: 1px solid #707070;
+        min-width: 100px;
+        background-color: white;
+        color: #707070;        
+}
+
+.btn-ok {
+        margin-left: 25px;
+        border: 1px solid transparent;
+        min-width: 100px;
+        background-color: #47A7EE;
+        color: white;
+}
+
+.body-text {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-size: 16px !important;
+}
+
+.mat-dialog-content {
+        display: block;
+        margin: 0 -24px;
+        padding: 0 24px;
+        max-height: 65vh;
+        overflow: hidden;
+        -webkit-overflow-scrolling: touch;
+}
+
+hr {
+        margin-left: -48px;
+        margin-right: -48px;
+        margin-top: 25px;
+}
